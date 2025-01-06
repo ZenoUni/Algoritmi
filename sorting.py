@@ -7,10 +7,14 @@ sizes = [10,100,1000,2000,5000]
 sys.setrecursionlimit(2 * max(sizes))
 
 def selection_sort(arr):
-    for i in range(len(arr)):
-        min_idx = arr.index(min(arr))
-        if i != min_idx:
-            arr[i], arr[min_idx] = arr[min_idx], arr[i]
+    n=len(arr)
+    for i in range(n):
+        min_idx=i
+        for j in range(i+1, n):
+            if (arr[j]<arr[min_idx]):
+                min_idx=j
+        if (min_idx!=i):
+            arr[i], arr[min_idx]=arr[min_idx], arr[i]
 
 def insertion_sort(a):
     for i in range(1,len(a)):
