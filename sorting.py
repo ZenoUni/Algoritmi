@@ -7,13 +7,8 @@ sizes = [10,100,1000,2000,5000]
 sys.setrecursionlimit(2 * max(sizes))
 
 def selection_sort(arr):
-    n = len(arr)
-    for i in range(n):
-        min_idx = i  # Inizialmente assumiamo che il minimo sia l'elemento corrente
-        for j in range(i + 1, n):  # Cerchiamo il minimo nel resto dell'array
-            if arr[j] < arr[min_idx]:  # Se troviamo un elemento più piccolo
-                min_idx = j  # Aggiorniamo l'indice del minimo
-        # Se l'indice del minimo non è quello corrente, facciamo uno scambio
+    for i in range(len(arr)):
+        min_idx = arr.index(min(arr))
         if i != min_idx:
             arr[i], arr[min_idx] = arr[min_idx], arr[i]
 
