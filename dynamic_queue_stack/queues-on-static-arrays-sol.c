@@ -43,11 +43,11 @@ void queue_destroy(Queue *q) {
 bool queue_add(Queue *q, TInfo value) {
     if(q->size < q->capacity) {
         printf("Adding %d to queue.\n", value);
-        q->item[(q->from + q->size % q->capacity)] = value;
+        q->item[(q->from + q->size) % q->capacity] = value; // Calcolo corretto della posizione
         q->size++;
         return true;
     }
-    return false;
+    return false; // Coda piena
 }
 
 TInfo queue_remove(Queue *q) {
@@ -55,27 +55,27 @@ TInfo queue_remove(Queue *q) {
         fprintf(stderr, "%s", "Cannot remove from an empty queue. Exiting.\n");
         exit(-1);
     }
-    TInfo result = q->item[q->from]; 
-    q->from = q->from + 1 % q->capacity;
+    TInfo result = q->item[q->from];
+    q->from = (q->from + 1) % q->capacity; // Uso delle parentesi per priorità corretta
     q->size--;
     return result;
 }
 
 void queue_print(Queue *q) {
     printf("QUEUE = [");
-    if(q->size>0){
+    if(q->size > 0) {
         int i = q->from;
-        int to = q->from + q->size - 1 % q->capacity;
-        for(; i != to; i = i+1 % q->capacity) {
+        int to = (q->from + q->size - 1) % q->capacity; // Priorità corretta
+        for (; i != to; i = (i + 1) % q->capacity) { // Iterazione circolare
             printf("%d, ", q->item[i]);
         }
         printf("%d", q->item[i]);
     }
-    printf("] INTERNAL REPR = (capacity=%d; from=%d; to=%d)[", q->capacity, q->from, q->from+q->size % q->capacity);
-    for(int i=0; i<q->capacity; i++) {
+    printf("] INTERNAL REPR = (capacity=%d; from=%d; to=%d)[", q->capacity, q->from, (q->from + q->size) % q->capacity);
+    for(int i = 0; i < q->capacity; i++) {
         printf("%d,", q->item[i]);
     }
-    printf("]");
+    printf("]\n");
 }
 
 int main() {
