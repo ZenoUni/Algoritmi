@@ -82,6 +82,14 @@ void binarytree_visit_preorder(TBinaryTree tree, void (*f)(TInfo)) {
     }
 }
 
+void binarytree_visit_postorder(TBinaryTree tree, void (*f)(TInfo)) {
+    if (tree != NULL) {
+        binarytree_visit_postorder(tree->left, f);
+        binarytree_visit_postorder(tree->right, f);
+        f(tree->info);
+    }
+}
+
 char *spacing(int level, char* s) {
     int i=0;
     for(; i<(level * 2); i++) {
@@ -185,10 +193,6 @@ int binarytree_height(TBinaryTree tree) {
 
 int binarytree_count_leaves(TBinaryTree tree) {
     return -1; // TODO: implement this
-}
-
-void binarytree_visit_postorder(TBinaryTree tree, void (*f)(TInfo)) {
-    // TODO: implement this
 }
 
 int main() {
