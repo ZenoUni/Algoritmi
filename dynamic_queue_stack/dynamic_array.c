@@ -61,9 +61,6 @@ DArray darray_create_capac(int initial_size, int initial_capacity) {
 }
 
 void darray_set(DArray* da, int pos, TInfo value) {
-    int curr_size = da->size;
-    // one approach would be to conditionally set the value at pos iff pos < size
-    // another approach would be to expand the size (but then the user should be aware that a O(n) cost may apply)
     if(da->size <= pos) {
         darray_resize(da, pos+1);
         // for(int i=curr_size; i<pos+1; i++) darray_set(da, i, 0);
