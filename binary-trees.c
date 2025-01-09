@@ -31,7 +31,6 @@ void binarytree_visit(TBinaryTree tree, void (*f)(TInfo));
 void binarytree_visit_preorder(TBinaryTree tree, void (*f)(TInfo));
 void binarytree_visit_postorder(TBinaryTree tree, void (*f)(TInfo));
 TNode *binarytree_search(TBinaryTree tree, TInfo value);
-TNode *binarytree_search(TBinaryTree tree, TInfo value);
 TBinaryTree binarytree_insert(TBinaryTree tree, TInfo info);
 TBinaryTree binarytree_delete(TBinaryTree tree, TInfo info);
 bool binarytree_is_empty(TBinaryTree tree);
@@ -61,7 +60,7 @@ TBinaryTree binarytree_destroy(TBinaryTree tree) {
     if(tree != NULL) {
         tree->left = binarytree_destroy(tree->left);
         tree->right = binarytree_destroy(tree->right);
-        node_destroy((TNode*) tree);
+        node_destroy(tree);
     }
     return NULL;
 }
