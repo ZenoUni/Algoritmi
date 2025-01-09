@@ -182,17 +182,25 @@ int binarytree_count_nodes(TBinaryTree tree) {
     return 1 + nnodes_left + nnodes_right;
 }
 
-
-TBinaryTree binarytree_init(TInfo* entries, int nentries) {
-    return NULL; // TODO: implement this
+int binarytree_count_leaves(TBinaryTree tree) {
+    if (tree == NULL) return 0;
+    if (tree->left == NULL && tree->right == NULL) return 1;
+    return binarytree_count_leaves(tree->left) + binarytree_count_leaves(tree->right);
 }
 
 int binarytree_height(TBinaryTree tree) {
-    return -1; // TODO: implement this
+    if (tree == NULL) return -1; // Altezza di un albero vuoto
+    int left_height = binarytree_height(tree->left);
+    int right_height = binarytree_height(tree->right);
+    return 1 + (left_height > right_height ? left_height : right_height);
 }
 
-int binarytree_count_leaves(TBinaryTree tree) {
-    return -1; // TODO: implement this
+TBinaryTree binarytree_init(TInfo* entries, int nentries) {
+    TBinaryTree tree = NULL;
+    for (int i = 0; i < nentries; i++) {
+        tree = binarytree_insert(tree, entries[i]);
+    }
+    return tree;
 }
 
 int main() {
