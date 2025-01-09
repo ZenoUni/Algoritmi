@@ -20,7 +20,6 @@ list* list_create (TInfo val, list* t){
 void list_destroy(list *L) {
     if (L != NULL) {
         list_destroy(L->next);
-        L->next = NULL; /* non necessario... */
         free(L);
     }
 }
